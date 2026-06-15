@@ -81,6 +81,19 @@ body{font-family:"Microsoft JhengHei","PingFang TC",Arial,sans-serif;background:
 </style>
 </head>
 <body>
+<div id="pwgate" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#1a5276,#2980b9);display:flex;align-items:center;justify-content:center;font-family:'Microsoft JhengHei','PingFang TC',Arial,sans-serif;">
+  <div style="background:#fff;padding:34px 30px;border-radius:16px;box-shadow:0 12px 44px rgba(0,0,0,.35);width:310px;max-width:88vw;text-align:center;">
+    <div style="font-size:40px;margin-bottom:6px;">🔒</div>
+    <div style="font-size:18px;font-weight:700;color:#2d3748;margin-bottom:4px;">健康服務報告平台</div>
+    <div style="font-size:13px;color:#718096;margin-bottom:16px;">請輸入密碼以進入</div>
+    <input id="pwinput" type="password" placeholder="密碼" autofocus style="width:100%;padding:11px 12px;border:1.5px solid #cbd5e0;border-radius:9px;font-size:15px;box-sizing:border-box;" onkeydown="if(event.key==='Enter')pwCheck()">
+    <div id="pwerr" style="color:#e53e3e;font-size:12px;height:16px;margin:7px 0 2px;"></div>
+    <button onclick="pwCheck()" style="width:100%;padding:11px;background:#2980b9;color:#fff;border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;">進　入</button>
+  </div>
+</div>
+<script>
+(function(){var P="20260615@";if(sessionStorage.getItem('hm_auth')==='1'){var g=document.getElementById('pwgate');if(g)g.parentNode.removeChild(g);}window.pwCheck=function(){var i=document.getElementById('pwinput');if(i.value===P){sessionStorage.setItem('hm_auth','1');var g=document.getElementById('pwgate');if(g)g.parentNode.removeChild(g);}else{document.getElementById('pwerr').textContent='密碼錯誤，請再試一次';i.value='';i.focus();}};var t=setInterval(function(){var i=document.getElementById('pwinput');if(i){i.focus();clearInterval(t);}},100);})();
+</script>
 <div id="app-bar">
   <h1>🏥 健康管理服務報告平台</h1>
   <div class="bar-btns">
