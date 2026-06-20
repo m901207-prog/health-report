@@ -115,7 +115,7 @@ body{font-family:"Microsoft JhengHei","PingFang TC",Arial,sans-serif;background:
       <div class="section-header"><div class="section-icon" style="background:#ebf8ff;">👤</div><h3>基本資料</h3></div>
       <div class="form-row">
         <div class="form-group"><label>個案姓名</label><input type="text" id="f_name" placeholder="例：吳OO"></div>
-        <div class="form-group"><label>稱謂</label><select id="f_title"><option>先生</option><option>女士</option></select></div>
+        <div class="form-group"><label>稱謂</label><select id="f_title" onchange="if(window.autoStatus)autoStatus('ua')"><option>先生</option><option>女士</option></select></div>
         <div class="form-group"><label>報告區間（起）</label><input type="text" id="f_period_start" placeholder="000/00/00" maxlength="10" onblur="fmtRocDate(this)"></div>
         <div class="form-group"><label>報告區間（迄）</label><input type="text" id="f_period_end" placeholder="000/00/00" maxlength="10" onblur="fmtRocDate(this)"></div>
       </div>
@@ -298,7 +298,19 @@ function addProject(name){name=(name||'').trim();if(!name)return;let arr=loadPro
 function init(){buildCareDates();buildDoctorDates();buildGoalTable();renderProjects();renderSidebar();if(records.length>0)loadRecord(records[0].id);}
 function buildCareDates(){const el=document.getElementById('care-dates');el.innerHTML='';for(let i=1;i<=12;i++)el.innerHTML+=`<div class="date-cell"><label>${i}</label><input type="text" id="f_care_${i}" placeholder="000/00/00" maxlength="10" onblur="fmtRocDate(this);syncCareCount();"></div>`;}
 function buildDoctorDates(){const el=document.getElementById('doctor-dates');el.innerHTML='';for(let i=1;i<=4;i++)el.innerHTML+=`<div class="date-cell"><label>${i}</label><input type="text" id="f_doc_${i}" placeholder="000/00/00" maxlength="10" onblur="fmtRocDate(this);syncDoctorCount();"></div>`;}
-function buildGoalTable(){document.getElementById('goal-tbody').innerHTML=GOAL_ITEMS.map(item=>{const tgt=item.opts?`<select id="g_target_${item.key}">${item.opts.map(o=>`<option ${o===item.def?'selected':''}>${o}</option>`).join('')}</select>`:`<input type="text" id="g_target_${item.key}" value="${item.def}">`;return `<tr><td style="text-align:left;font-weight:600;">${item.label}</td><td>${tgt}</td><td><input type="text" id="g_result_${item.key}"></td><td><select id="g_status_${item.key}"><option value="---">---</option><option>正常</option><option>異常</option></select></td></tr>`;}).join('');}
+var RULE={bmi:1,bp_sys:1,bp_dia:1,bs_fast:1,bs_post:1,ua:1,chol:1,hr:1};
+function judge(key,v,title){v=parseFloat(v);if(isNaN(v))return '';switch(key){
+case 'bmi':return (v>=18.5&&v<=24)?'正常':'異常';
+case 'bp_sys':return (v>=90&&v<=120)?'正常':'異常';
+case 'bp_dia':return (v>=60&&v<=100)?'正常':'異常';
+case 'bs_fast':return (v>=70&&v<=100)?'正常':'異常';
+case 'bs_post':return (v>=70&&v<=140)?'正常':'異常';
+case 'ua':return (title==='女士')?((v>=2.5&&v<=6.0)?'正常':'異常'):((v>=3.0&&v<=7.0)?'正常':'異常');
+case 'chol':return (v<=200)?'正常':'異常';
+case 'hr':return (v>=60&&v<=100)?'正常':'異常';
+default:return '';}}
+function autoStatus(key){if(!RULE[key])return;var r=document.getElementById('g_result_'+key);if(!r)return;var te=document.getElementById('f_title');var title=te?te.value:'';var res=judge(key,r.value,title);var sel=document.getElementById('g_status_'+key);if(sel)sel.value=res?res:'---';}
+function buildGoalTable(){document.getElementById('goal-tbody').innerHTML=GOAL_ITEMS.map(item=>{const tgt=item.opts?`<select id="g_target_${item.key}">${item.opts.map(o=>`<option ${o===item.def?'selected':''}>${o}</option>`).join('')}</select>`:`<input type="text" id="g_target_${item.key}" value="${item.def}">`;return `<tr><td style="text-align:left;font-weight:600;">${item.label}</td><td>${tgt}</td><td><input type="text" id="g_result_${item.key}" oninput="autoStatus('${item.key}')"></td><td><select id="g_status_${item.key}"><option value="---">---</option><option>正常</option><option>異常</option></select></td></tr>`;}).join('');}
 function selectQuarter(el){document.querySelectorAll('.quarter-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');document.getElementById('f_quarter').value=el.dataset.q;}
 function syncCareCount(){let n=0;for(let i=1;i<=12;i++){const el=document.getElementById('f_care_'+i);if(el&&el.value.trim())n++;}const c=document.getElementById('f_care_count');if(c)c.value=n;}
 function syncDoctorCount(){let n=0;for(let i=1;i<=4;i++){const el=document.getElementById('f_doc_'+i);if(el&&el.value.trim())n++;}const c=document.getElementById('f_doctor_count');if(c)c.value=n;}
