@@ -115,7 +115,7 @@ body{font-family:"Microsoft JhengHei","PingFang TC",Arial,sans-serif;background:
       <div class="section-header"><div class="section-icon" style="background:#ebf8ff;">👤</div><h3>基本資料</h3></div>
       <div class="form-row">
         <div class="form-group"><label>個案姓名</label><input type="text" id="f_name" placeholder="例：吳OO"></div>
-        <div class="form-group"><label>稱謂</label><select id="f_title" onchange="if(window.autoStatus)autoStatus('ua')"><option>先生</option><option>女士</option></select></div>
+        <div class="form-group"><label>稱謂</label><select id="f_title" onchange="if(window.autoStatus){autoStatus('ua');autoVital();}"><option>先生</option><option>女士</option></select></div>
         <div class="form-group"><label>報告區間（起）</label><input type="text" id="f_period_start" placeholder="000/00/00" maxlength="10" onblur="fmtRocDate(this)"></div>
         <div class="form-group"><label>報告區間（迄）</label><input type="text" id="f_period_end" placeholder="000/00/00" maxlength="10" onblur="fmtRocDate(this)"></div>
       </div>
@@ -156,7 +156,7 @@ body{font-family:"Microsoft JhengHei","PingFang TC",Arial,sans-serif;background:
       <div style="margin-bottom:20px;">
         <div style="font-size:13px;font-weight:700;color:#2d3748;margin-bottom:8px;">1、血壓量測數據</div>
         <div class="stats-row">
-          <div class="stat-item"><span class="stat-dot" style="background:#48bb78;"></span>平均收縮壓約<input type="text" class="stat-input" id="f_bp_sys_val" placeholder="000">mmHg<span class="stat-target">目標 130</span></div>
+          <div class="stat-item"><span class="stat-dot" style="background:#48bb78;"></span>平均收縮壓約<input type="text" class="stat-input" id="f_bp_sys_val" placeholder="000">mmHg<span class="stat-target">目標 120</span></div>
           <div class="stat-item"><span class="stat-dot" style="background:#d69e2e;"></span>平均舒張壓約<input type="text" class="stat-input" id="f_bp_dia_val" placeholder="000">mmHg<span class="stat-target">目標 80</span></div>
         </div>
         <div class="img-upload-area" onclick="document.getElementById('upload_bp').click()">
@@ -185,23 +185,23 @@ body{font-family:"Microsoft JhengHei","PingFang TC",Arial,sans-serif;background:
       <div style="border-top:1px solid #edf2f7;padding-top:16px;margin-bottom:16px;">
         <div style="font-size:13px;font-weight:700;color:#2d3748;margin-bottom:8px;">3、心電圖量測數據</div>
         <div class="form-row">
-          <div class="form-group"><label>● 平均心跳數（次/分）</label><input type="text" id="f_hr_val" placeholder="000"></div>
+          <div class="form-group"><label>● 平均心跳數（次/分）</label><input type="text" id="f_hr_val" placeholder="000" oninput="autoVital()"></div>
           <div class="form-group"><label>目標</label><div style="padding:8px 10px;font-size:13px;font-weight:700;background:#f7fafc;border-radius:8px;border:1.5px solid #e2e8f0;">60-100 次/分</div></div>
-          <div class="form-group"><label>量測結果</label><input type="text" id="f_hr_note" placeholder="未見異常"></div>
+          <div class="form-group"><label>量測結果</label><input type="text" id="f_hr_note" placeholder="自動判定" readonly style="background:#f7fafc;text-align:center;font-weight:700;"></div>
         </div>
       </div>
       <div style="border-top:1px solid #edf2f7;padding-top:16px;">
         <div style="font-size:13px;font-weight:700;color:#2d3748;margin-bottom:8px;">4、總膽固醇、血液尿酸最新量測數據</div>
         <div class="form-row">
-          <div class="form-group"><label>總膽固醇值（mg/dL）</label><input type="text" id="f_chol_val" placeholder="000"></div>
+          <div class="form-group"><label>總膽固醇值（mg/dL）</label><input type="text" id="f_chol_val" placeholder="000" oninput="autoVital()"></div>
           <div class="form-group"><label>目標值</label><div style="padding:8px 10px;font-size:13px;font-weight:700;background:#edf2f7;border-radius:8px;border:1.5px solid #e2e8f0;color:#2d3748;">200 mg/dL</div><input type="hidden" id="f_chol_target" value="200"></div>
-          <div class="form-group"><label>結果</label><select id="f_chol_result"><option value="">---</option><option>正常</option><option>異常</option></select></div>
+          <div class="form-group"><label>結果</label><input type="text" id="f_chol_result" readonly placeholder="自動判定" style="background:#f7fafc;text-align:center;font-weight:700;"></div>
           <div class="form-group"><label>量測日期</label><input type="text" id="f_chol_date" placeholder="000/00/00" maxlength="10" onblur="fmtRocDate(this)"></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>血液尿酸值（mg/dL）</label><input type="text" id="f_ua_val" placeholder="000"></div>
+          <div class="form-group"><label>血液尿酸值（mg/dL）</label><input type="text" id="f_ua_val" placeholder="000" oninput="autoVital()"></div>
           <div class="form-group"><label>目標值</label><select id="f_ua_target"><option value="">---</option><option value="6.0">6.0</option><option value="7.0">7.0</option></select></div>
-          <div class="form-group"><label>結果</label><select id="f_ua_result"><option value="">---</option><option>正常</option><option>異常</option></select></div>
+          <div class="form-group"><label>結果</label><input type="text" id="f_ua_result" readonly placeholder="自動判定" style="background:#f7fafc;text-align:center;font-weight:700;"></div>
           <div class="form-group"><label>量測日期</label><input type="text" id="f_ua_date" placeholder="000/00/00" maxlength="10" onblur="fmtRocDate(this)"></div>
         </div>
       </div>
@@ -228,8 +228,8 @@ body{font-family:"Microsoft JhengHei","PingFang TC",Arial,sans-serif;background:
         <div class="upload-icon">🖼️</div>
         <div style="font-size:13px;font-weight:700;color:#4a5568;">衛教資訊圖片</div>
         <div class="upload-hint">點擊上傳圖片（PNG / JPG）</div>
+        <div id="edu-img-list" onclick="event.stopPropagation()"></div>
       </div>
-      <div id="edu-img-list"></div>
     </div>
 
     <div class="section-card">
@@ -264,7 +264,7 @@ function fmtRocDate(el){let v=el.value.replace(/[^\d]/g,'');if(v.length>3&&v.len
 const GOAL_ITEMS=[
   {key:'weight',label:'體重 (Kg)',def:'80'},
   {key:'bmi',label:'BMI',def:'18.5-24'},
-  {key:'bp_sys',label:'血壓-收縮壓 (mmHg)',def:'130'},
+  {key:'bp_sys',label:'血壓-收縮壓 (mmHg)',def:'120'},
   {key:'bp_dia',label:'血壓-舒張壓 (mmHg)',def:'80'},
   {key:'bs_fast',label:'血糖-空腹 (mg/dL)',def:'70-100'},
   {key:'bs_post',label:'血糖-餐後 (mg/dL)',def:'140'},
@@ -289,7 +289,7 @@ function handleImgUpload(key,input){const f=input.files[0];if(!f)return;const r=
 function clearImg(key){imgData[key]=null;const p=document.getElementById('preview_'+key);if(p){p.src='';p.style.display='none';}const c=document.getElementById('clear_'+key);if(c)c.style.display='none';const i=document.getElementById('upload_'+key);if(i)i.value='';}
 function loadImgUI(key,src){if(src){imgData[key]=src;const p=document.getElementById('preview_'+key);if(p){p.src=src;p.style.display='block';}const c=document.getElementById('clear_'+key);if(c)c.style.display='inline-block';}else clearImg(key);}
 function handleEduImgUpload(input){Array.from(input.files).forEach(f=>{const r=new FileReader();r.onload=e=>{eduImgs.push(e.target.result);renderEduImgs();};r.readAsDataURL(f);});input.value='';}
-function renderEduImgs(){document.getElementById('edu-img-list').innerHTML=eduImgs.map((s,i)=>`<div style="position:relative;margin-top:6px;"><img src="${s}" style="max-width:100%;max-height:420px;border-radius:8px;border:1px solid #e2e8f0;display:block;"><button onclick="delEduImg(${i})" style="position:absolute;top:6px;right:6px;background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:2px 8px;cursor:pointer;font-size:11px;font-weight:700;">✕</button></div>`).join('');}
+function renderEduImgs(){document.getElementById('edu-img-list').innerHTML=eduImgs.map((s,i)=>`<div style="position:relative;margin-top:6px;"><img src="${s}" style="max-width:100%;max-height:260px;border-radius:8px;border:1px solid #e2e8f0;display:block;margin:8px auto;"><button onclick="event.stopPropagation();delEduImg(${i})" style="position:absolute;top:6px;right:6px;background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:2px 8px;cursor:pointer;font-size:11px;font-weight:700;">✕</button></div>`).join('');}
 function delEduImg(idx){eduImgs.splice(idx,1);renderEduImgs();}
 
 function loadProjects(){let arr;try{arr=JSON.parse(localStorage.getItem('hm_projects')||'null');}catch(e){arr=null;}if(!Array.isArray(arr)||!arr.length)arr=['遠距智能健管服務套裝'];return arr;}
@@ -310,6 +310,7 @@ case 'chol':return (v<=200)?'正常':'異常';
 case 'hr':return (v>=60&&v<=100)?'正常':'異常';
 default:return '';}}
 function autoStatus(key){if(!RULE[key])return;var r=document.getElementById('g_result_'+key);if(!r)return;var te=document.getElementById('f_title');var title=te?te.value:'';var res=judge(key,r.value,title);var sel=document.getElementById('g_status_'+key);if(sel)sel.value=res?res:'---';}
+function autoVital(){var te=document.getElementById('f_title');var t=te?te.value:'';function sv(id,v){var e=document.getElementById(id);if(e)e.value=v;}var cv=document.getElementById('f_chol_val');if(cv)sv('f_chol_result',cv.value.trim()===''?'':judge('chol',cv.value,t));var uv=document.getElementById('f_ua_val');if(uv)sv('f_ua_result',uv.value.trim()===''?'':judge('ua',uv.value,t));var hv=document.getElementById('f_hr_val');if(hv)sv('f_hr_note',hv.value.trim()===''?'':judge('hr',hv.value,t));}
 function buildGoalTable(){document.getElementById('goal-tbody').innerHTML=GOAL_ITEMS.map(item=>{const tgt=item.opts?`<select id="g_target_${item.key}">${item.opts.map(o=>`<option ${o===item.def?'selected':''}>${o}</option>`).join('')}</select>`:`<input type="text" id="g_target_${item.key}" value="${item.def}">`;return `<tr><td style="text-align:left;font-weight:600;">${item.label}</td><td>${tgt}</td><td><input type="text" id="g_result_${item.key}" oninput="autoStatus('${item.key}')"></td><td><select id="g_status_${item.key}"><option value="---">---</option><option>正常</option><option>異常</option></select></td></tr>`;}).join('');}
 function selectQuarter(el){document.querySelectorAll('.quarter-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');document.getElementById('f_quarter').value=el.dataset.q;}
 function syncCareCount(){let n=0;for(let i=1;i<=12;i++){const el=document.getElementById('f_care_'+i);if(el&&el.value.trim())n++;}const c=document.getElementById('f_care_count');if(c)c.value=n;}
@@ -320,7 +321,7 @@ const FIELD_IDS=['name','title','period_start','period_end','quarter','start_dat
 
 function getFormData(){const d={id:currentId||Date.now().toString()};FIELD_IDS.forEach(id=>{const el=document.getElementById('f_'+id);if(el)d[id]=el.value;});for(let i=1;i<=12;i++){const el=document.getElementById('f_care_'+i);d['care_'+i]=el?el.value:'';}for(let i=1;i<=4;i++){const el=document.getElementById('f_doc_'+i);d['doc_'+i]=el?el.value:'';}GOAL_ITEMS.forEach(item=>{d['g_target_'+item.key]=document.getElementById('g_target_'+item.key)?.value||'';d['g_result_'+item.key]=document.getElementById('g_result_'+item.key)?.value||'';d['g_status_'+item.key]=document.getElementById('g_status_'+item.key)?.value||'---';});d.img_bp=imgData.bp||null;d.img_bs=imgData.bs||null;d.edu_imgs=[...eduImgs];return d;}
 
-function fillForm(d){FIELD_IDS.forEach(id=>{const el=document.getElementById('f_'+id);if(el&&d[id]!==undefined)el.value=d[id];});for(let i=1;i<=12;i++){const el=document.getElementById('f_care_'+i);if(el)el.value=d['care_'+i]||'';}for(let i=1;i<=4;i++){const el=document.getElementById('f_doc_'+i);if(el)el.value=d['doc_'+i]||'';}GOAL_ITEMS.forEach(item=>{const t=document.getElementById('g_target_'+item.key);if(t)t.value=d['g_target_'+item.key]||item.def;const r=document.getElementById('g_result_'+item.key);if(r)r.value=d['g_result_'+item.key]||'';const s=document.getElementById('g_status_'+item.key);if(s)s.value=d['g_status_'+item.key]||'---';});document.querySelectorAll('.quarter-btn').forEach(b=>b.classList.toggle('selected',b.dataset.q===(d.quarter||'1')));loadImgUI('bp',d.img_bp||null);loadImgUI('bs',d.img_bs||null);eduImgs=Array.isArray(d.edu_imgs)?[...d.edu_imgs]:[];renderEduImgs();}
+function fillForm(d){FIELD_IDS.forEach(id=>{const el=document.getElementById('f_'+id);if(el&&d[id]!==undefined)el.value=d[id];});for(let i=1;i<=12;i++){const el=document.getElementById('f_care_'+i);if(el)el.value=d['care_'+i]||'';}for(let i=1;i<=4;i++){const el=document.getElementById('f_doc_'+i);if(el)el.value=d['doc_'+i]||'';}GOAL_ITEMS.forEach(item=>{const t=document.getElementById('g_target_'+item.key);if(t)t.value=d['g_target_'+item.key]||item.def;const r=document.getElementById('g_result_'+item.key);if(r)r.value=d['g_result_'+item.key]||'';const s=document.getElementById('g_status_'+item.key);if(s)s.value=d['g_status_'+item.key]||'---';});document.querySelectorAll('.quarter-btn').forEach(b=>b.classList.toggle('selected',b.dataset.q===(d.quarter||'1')));loadImgUI('bp',d.img_bp||null);loadImgUI('bs',d.img_bs||null);eduImgs=Array.isArray(d.edu_imgs)?[...d.edu_imgs]:[];renderEduImgs();autoVital();}
 
 function saveRecord(){const data=getFormData();addProject(data.project);data.label=(data.name||'未命名')+' '+(data.period_start||'');const idx=records.findIndex(r=>r.id===data.id);if(idx>=0)records[idx]=data;else{records.unshift(data);currentId=data.id;}try{localStorage.setItem('hm_records8',JSON.stringify(records));alert('✅ 已儲存！');}catch(e){const slim=records.map(r=>{const c={...r};delete c.img_bp;delete c.img_bs;c.edu_imgs=[];return c;});localStorage.setItem('hm_records8',JSON.stringify(slim));alert('✅ 已儲存（圖片暫存本次）');}renderSidebar();}
 function loadRecord(id){const rec=records.find(r=>r.id===id);if(!rec)return;currentId=id;fillForm(rec);document.querySelectorAll('.record-item').forEach(el=>el.classList.toggle('active',el.dataset.id===id));}
@@ -451,7 +452,7 @@ function buildReportHTML(d){
   <div class="rpt-page">
     ${hdr}
     <div class="rpt-sec">二、本月份測量數據趨勢分析</div>
-    <div class="rpt-meas-label">1、血壓量測數據<span class="rpt-meas-tag"><span class="rpt-meas-dot" style="background:#48bb78;"></span>平均收縮壓約 <strong>${d.bp_sys_val||'--'} mmHg</strong></span><span class="rpt-target">目標 130</span><span class="rpt-meas-tag"><span class="rpt-meas-dot" style="background:#d69e2e;"></span>平均舒張壓約 <strong>${d.bp_dia_val||'--'} mmHg</strong></span><span class="rpt-target">目標 80</span></div>
+    <div class="rpt-meas-label">1、血壓量測數據<span class="rpt-meas-tag"><span class="rpt-meas-dot" style="background:#48bb78;"></span>平均收縮壓約 <strong>${d.bp_sys_val||'--'} mmHg</strong></span><span class="rpt-target">目標 120</span><span class="rpt-meas-tag"><span class="rpt-meas-dot" style="background:#d69e2e;"></span>平均舒張壓約 <strong>${d.bp_dia_val||'--'} mmHg</strong></span><span class="rpt-target">目標 80</span></div>
     ${bpImg}
     <div class="rpt-meas-label">2、血糖量測數據<span class="rpt-meas-tag"><span class="rpt-meas-dot" style="background:#48bb78;"></span>平均空腹血糖值 <strong>${d.bs_val||'--'} mg/dL</strong></span><span class="rpt-target">目標 70-100</span></div>
     ${bsImg}
