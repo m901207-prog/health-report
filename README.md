@@ -4,14 +4,7 @@
 
 ---
 
-## 檔案位置
 
-```
-D:\ANTIgravity\Health management report webpage\
-├─ 健康服務報告.html      ← 正式專案檔（平常編輯／使用這個）
-├─ index.html            ← 與專案檔內容相同，供 GitHub Pages 上線用
-├─ README.md             ← 本說明文件
-└─ 舊版備份\              ← 歷史版本（回溯用，平常不需理會）
 ```
 
 ---
@@ -19,7 +12,6 @@ D:\ANTIgravity\Health management report webpage\
 ## 線上版（GitHub Pages）
 
 - 網址：**https://m901207-prog.github.io/health-report/**
-- 進入密碼：**20260615@**
 - 夥伴用任何裝置的瀏覽器打開網址、輸入密碼即可使用，不必下載。
 - 此為「簡易密碼鎖」，能擋掉隨意點進來的人；因屬公開網站，密碼寫在網頁內，並非高強度加密。真正的個案保護仍靠「資料只存在各自瀏覽器、JSON 備份不上傳」。
 - GitHub 儲存庫：`m901207-prog/health-report`（Public）
